@@ -1,12 +1,15 @@
 package wepesa.core;
 
 
-import com.sun.net.httpserver.HttpServer;
-import com.sun.xml.internal.ws.api.policy.PolicyResolver;
 import jersey.repackaged.com.google.common.util.concurrent.ThreadFactoryBuilder;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
+//import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
 import org.glassfish.grizzly.strategies.WorkerThreadIOStrategy;
 import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
@@ -14,12 +17,10 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class Server
 {
-    private static Logger LOG = LogManager.getRootLogger();
+//    private static Logger LOG = LogManager.getRootLogger();
 
     public static final URI BASE_URI = UriBuilder
             .fromPath(Constants.BASE_URI)
@@ -31,21 +32,21 @@ public class Server
     public static void main(String[] args) throws IOException
     {
 
-        final HttpServer server = startHttpServer();
+//        final HttpServer server = startHttpServer();
 
-        TCPNIOTransport transport = server.getListeners().iterator().next().getTransport();
-        transport.setIOStrategy(WorkerThreadIOStrategy.getInstance());
+//        TCPNIOTransport transport = server.getListeners().iterator().next().getTransport();
+//        transport.setIOStrategy(WorkerThreadIOStrategy.getInstance());
 
-        ThreadPoolConfig ioThreadPoolConfig = transport.getWorkerThreadPoolConfig();
-        processHttpIoThreadPoolConfig(ioThreadPoolConfig);
+//        ThreadPoolConfig ioThreadPoolConfig = transport.getWorkerThreadPoolConfig();
+//        processHttpIoThreadPoolConfig(ioThreadPoolConfig);
 
 //        LOG.debug("[Server ThreadPool Config: name=" + ioThreadPoolConfig.getPoolName() +
 //                "; core_size=" + ioThreadPoolConfig.getCorePoolSize() +
 //                "; max_size=" + ioThreadPoolConfig.getMaxPoolSize() + "]");
 
-        server.start();
+//        server.start();
 
-//        LOG.debug("[Jenko Server started at " + BASE_URI.toString() + "]");
+//        LOG.debug("[WePesa Server started at " + BASE_URI.toString() + "]");
 
         Runtime.getRuntime().addShutdownHook(new Thread()
         {
@@ -60,14 +61,14 @@ public class Server
     public static HttpServer startHttpServer()
     {
         initServerContext();
-//        final JenkoApplication protoApiServer = new JenkoApplication();
-//        final ResourceConfig resourceConfig = ResourceConfig.forApplication(protoApiServer);
-//        return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, resourceConfig, false);
+        final WePesaApplication protoApiServer = new WePesaApplication();
+        final ResourceConfig resourceConfig = ResourceConfig.forApplication(protoApiServer);
+        return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, resourceConfig, false);
     }
 
     public static void shutdown(HttpServer server)
     {
-//        LOG.debug("[Jenko Server stopped]");
+//        LOG.debug("[WePesa Server stopped]");
 //        PolicyResolver.ServerContext.destroy();
 //        server.shutdownNow();
     }
