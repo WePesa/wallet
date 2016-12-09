@@ -1,0 +1,20 @@
+# Install npm 
+(sudo) npm install
+
+# Install bower 
+bower install
+
+#Install less via grunt 
+grunt less
+
+#Install sass & serve via grunt
+grunt sass
+grunt serve
+
+# In order to run the windows icon maker on UBUNTU 16.04/15.05/14.04/13.04/12.04 (on a 32 bit machine)
+sudo add-apt-repository ppa:ubuntu-wine/ppa
+sudo apt-get update
+sudo apt-get install wine1.7-i386
+
+# Then when running *grunt nwjs* set the following
+export WINEARCH="win32"
