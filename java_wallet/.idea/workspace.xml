@@ -46,11 +46,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerContext.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerContext.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/core/ServerContext.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9139785">
+            <state vertical-scroll-proportion="0.0">
               <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WePesaApplication.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/core/WePesaApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24193548">
+              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,6 +90,7 @@
         <option value="$PROJECT_DIR$/src/main/java/wepesa/core/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/wepesa/core/Server.java" />
         <option value="$PROJECT_DIR$/src/main/java/wepesa/core/ServerContext.java" />
+        <option value="$PROJECT_DIR$/src/main/java/wepesa/core/WePesaApplication.java" />
       </list>
     </option>
   </component>
@@ -424,12 +437,12 @@
       <created>1481305033292</created>
       <option name="number" value="Default" />
       <updated>1481305033292</updated>
-      <workItem from="1481305034562" duration="708000" />
+      <workItem from="1481305034562" duration="1025000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="708000" />
+    <option name="totallyTimeSpent" value="1025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="678" extended-state="0" />
@@ -502,8 +515,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/core/ServerContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9139785">
+        <state vertical-scroll-proportion="0.0">
           <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/core/WePesaApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24193548">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
