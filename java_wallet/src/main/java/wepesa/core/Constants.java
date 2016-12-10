@@ -9,9 +9,6 @@ public final class Constants
     public static final String HOST = "0.0.0.0";
     public static final int PORT = 7070;
 
-    /* Contract Properties */
-    public static final String USER_DETAILS_STORAGE_CONTRACT_ADDRESS = "0x0ce78142fbd44f8435ad3ebd2123fba07ea1572c";
-
     private Constants()
     {
     }
