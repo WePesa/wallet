@@ -36,14 +36,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractEndpoint.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AbstractEndpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/endpoints/AbstractEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6451613">
+            <state vertical-scroll-proportion="0.0">
               <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WalletEndpoint.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/endpoints/WalletEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.05376344">
+              <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,6 +118,7 @@
         <option value="$PROJECT_DIR$/src/main/java/wepesa/core/ServerContext.java" />
         <option value="$PROJECT_DIR$/src/main/java/wepesa/core/WePesaApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/wepesa/endpoints/AbstractEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/wepesa/endpoints/WalletEndpoint.java" />
       </list>
     </option>
   </component>
@@ -469,12 +480,12 @@
       <created>1481305033292</created>
       <option name="number" value="Default" />
       <updated>1481305033292</updated>
-      <workItem from="1481305034562" duration="3412000" />
+      <workItem from="1481305034562" duration="3650000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3412000" />
+    <option name="totallyTimeSpent" value="3650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="678" extended-state="0" />
@@ -619,11 +630,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/endpoints/AbstractEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6451613">
+        <state vertical-scroll-proportion="0.0">
           <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/wepesa/endpoints/WalletEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05376344">
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
