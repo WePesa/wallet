@@ -2,10 +2,6 @@ package wepesa.core;
 
 
 import jersey.repackaged.com.google.common.util.concurrent.ThreadFactoryBuilder;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-//import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
 import org.glassfish.grizzly.strategies.WorkerThreadIOStrategy;
 import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -18,9 +14,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Server
 {
-//    private static Logger LOG = LogManager.getRootLogger();
+    private static Logger LOG = LogManager.getRootLogger();
 
     public static final URI BASE_URI = UriBuilder
             .fromPath(Constants.BASE_URI)
@@ -32,21 +34,21 @@ public class Server
     public static void main(String[] args) throws IOException
     {
 
-//        final HttpServer server = startHttpServer();
+        final HttpServer server = startHttpServer();
 
-//        TCPNIOTransport transport = server.getListeners().iterator().next().getTransport();
-//        transport.setIOStrategy(WorkerThreadIOStrategy.getInstance());
+        TCPNIOTransport transport = server.getListeners().iterator().next().getTransport();
+        transport.setIOStrategy(WorkerThreadIOStrategy.getInstance());
 
-//        ThreadPoolConfig ioThreadPoolConfig = transport.getWorkerThreadPoolConfig();
-//        processHttpIoThreadPoolConfig(ioThreadPoolConfig);
+        ThreadPoolConfig ioThreadPoolConfig = transport.getWorkerThreadPoolConfig();
+        processHttpIoThreadPoolConfig(ioThreadPoolConfig);
 
-//        LOG.debug("[Server ThreadPool Config: name=" + ioThreadPoolConfig.getPoolName() +
-//                "; core_size=" + ioThreadPoolConfig.getCorePoolSize() +
-//                "; max_size=" + ioThreadPoolConfig.getMaxPoolSize() + "]");
+        LOG.debug("[Server ThreadPool Config: name=" + ioThreadPoolConfig.getPoolName() +
+                "; core_size=" + ioThreadPoolConfig.getCorePoolSize() +
+                "; max_size=" + ioThreadPoolConfig.getMaxPoolSize() + "]");
 
-//        server.start();
+        server.start();
 
-//        LOG.debug("[WePesa Server started at " + BASE_URI.toString() + "]");
+        LOG.debug("[WePesa Server started at " + BASE_URI.toString() + "]");
 
         Runtime.getRuntime().addShutdownHook(new Thread()
         {
@@ -68,15 +70,15 @@ public class Server
 
     public static void shutdown(HttpServer server)
     {
-//        LOG.debug("[WePesa Server stopped]");
-//        PolicyResolver.ServerContext.destroy();
-//        server.shutdownNow();
+        LOG.debug("[WePesa Server stopped]");
+        ServerContext.destroy();
+        server.shutdownNow();
     }
 
     private static void initServerContext()
     {
         ExecutorService workerPool = getWorkerThreadPool();
-//        PolicyResolver.ServerContext.init(workerPool);
+        ServerContext.init(workerPool);
     }
 
     private static void processHttpIoThreadPoolConfig(ThreadPoolConfig threadPoolConfig)
