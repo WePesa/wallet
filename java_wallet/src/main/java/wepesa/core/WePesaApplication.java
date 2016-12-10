@@ -31,7 +31,7 @@ public class WePesaApplication extends Application
 //        resources.add(CampaignEndPoint.class);
 //
         /* Error Handler */
-//        resources.add(DefaultExceptionHandler.class);
+        resources.add(DefaultExceptionHandler.class);
 
         return resources;
     }
