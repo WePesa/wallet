@@ -1,5 +1,8 @@
 package wepesa.core;
 
+import wepesa.logging.RequestLogger;
+import wepesa.logging.ResponseLogger;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -18,16 +21,16 @@ public class WePesaApplication extends Application
         Set<Class<?>> resources = new HashSet<>();
 
         /* Logger */
-//        resources.add(RequestLogger.class);
-//        resources.add(ResponseLogger.class);
-//
+        resources.add(RequestLogger.class);
+        resources.add(ResponseLogger.class);
+
 //        /* Endpoints */
 //        resources.add(HealthEndPoint.class);
 //        resources.add(DreamerEndPoint.class);
 //        resources.add(SupporterEndPoint.class);
 //        resources.add(CampaignEndPoint.class);
 //
-//        /* Error Handler */
+        /* Error Handler */
 //        resources.add(DefaultExceptionHandler.class);
 
         return resources;
