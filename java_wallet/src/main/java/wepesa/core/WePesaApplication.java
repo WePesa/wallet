@@ -1,5 +1,6 @@
 package wepesa.core;
 
+import wepesa.endpoints.HealthEndPoint;
 import wepesa.endpoints.UserEndpoint;
 import wepesa.endpoints.WalletEndpoint;
 import wepesa.logging.RequestLogger;
