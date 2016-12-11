@@ -19,7 +19,7 @@ public class UserEndpoint extends AbstractEndpoint {
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void registerDreamer(String inputJson, @Suspended AsyncResponse asyncResponse) {
+    public void registerUser(String inputJson, @Suspended AsyncResponse asyncResponse) {
 
         workerPool.execute(() -> {
 
@@ -38,29 +38,6 @@ public class UserEndpoint extends AbstractEndpoint {
             catch (Exception e)
             {
                 asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
-                return;
-            }
-
-            Dreamer dreamer = new Dreamer();
-            dreamer.setFirstName(input.get("first_name"));
-            dreamer.setLastName(input.get("last_name"));
-            dreamer.setEmail(input.get("email"));
-            dreamer.setPhoneNumber(input.get("phone"));
-            dreamer.setAddress(input.get("address"));
-            dreamer.setPassword(input.get("password"));
-
-            String id = UUID.randomUUID() + String.valueOf(System.currentTimeMillis());
-
-            dreamer.setId(id);
-
-            DreamerApi dreamerApi = blockchainApiManager.getDreamerApi();
-
-            try {
-                dreamerApi.registerDreamer(dreamer);
-            } catch (Exception e) {
-                e.printStackTrace();
-
-                asyncResponse.resume(Response.status(Response.Status.INTERNAL_SERVER_ERROR).build());
                 return;
             }
 
