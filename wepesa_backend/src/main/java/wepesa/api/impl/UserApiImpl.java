@@ -15,11 +15,14 @@ public class UserApiImpl implements UserApi {
 
         DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
 
+        // TODO -- Create new addresses on all nodes
         return null;
     }
 
     @Override
     public boolean loginUser(String username, String password) {
+
+        DatabaseService.readUserFromTable(username);
         return false;
     }
 }

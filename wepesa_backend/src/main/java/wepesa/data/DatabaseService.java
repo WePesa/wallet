@@ -8,6 +8,7 @@ import java.sql.*;
 public class DatabaseService {
 
     public static final String INSERT_USER = "INSERT INTO user (email, first_name, last_name, password) VALUES (?, ?, ?, ?);";
+    public static final String FIND_USER = "SELECT * FROM user WHERE email = ?";
 
 
     public static void insertUserIntoTable(String email, String first_name, String last_name, String password) {
@@ -46,6 +47,44 @@ public class DatabaseService {
             }
                 System.out.print(e.getMessage());
                 throw new RuntimeException();
+
+        }
+    }
+
+    public static void readUserFromTable(String email) {
+
+        Connection databaseConnection = null;
+        PreparedStatement preparedStatement = null;
+        DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
+
+        try {
+            databaseConnection = databaseAdapter.getConnection();
+
+            preparedStatement = databaseConnection.prepareStatement(FIND_USER);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.print(resultSet);
+
+            preparedStatement.close();
+            databaseConnection.close();
+
+        } catch (SQLException e) {
+
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (databaseConnection != null) {
+                    databaseConnection.close();
+                }
+            } catch (Exception e1) {
+
+            }
+            System.out.print(e.getMessage());
+            throw new RuntimeException();
 
         }
     }
