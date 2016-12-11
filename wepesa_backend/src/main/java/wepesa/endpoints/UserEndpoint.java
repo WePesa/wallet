@@ -3,6 +3,7 @@ package wepesa.endpoints;
 import com.google.gson.reflect.TypeToken;
 import wepesa.api.UserApi;
 import wepesa.model.User;
+import wepesa.model.UserAddresses;
 import wepesa.utils.GsonProvider;
 
 import javax.ws.rs.*;
@@ -51,8 +52,10 @@ public class UserEndpoint extends AbstractEndpoint {
 
             UserApi userApi = apiManager.getUserApi();
 
+            UserAddresses userAddresses = new UserAddresses();
+
             try {
-                userApi.registerUser(user);
+                userAddresses = userApi.registerUser(user);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -60,7 +63,7 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
-//            asyncResponse.resume(buildSuccessJsonResponse(id));
+            asyncResponse.resume(buildSuccessJsonResponse(userAddresses));
         });
     }
 
