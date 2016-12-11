@@ -1,5 +1,7 @@
 package wepesa.data;
 
+import wepesa.core.Constants;
+
 import java.sql.*;
 
 /**
@@ -51,7 +53,7 @@ public class DatabaseService {
         }
     }
 
-    public static boolean readUserFromTable(String email, String password) {
+    public static int readUserFromTable(String email, String password) {
 
         Connection databaseConnection = null;
         PreparedStatement preparedStatement = null;
@@ -70,12 +72,12 @@ public class DatabaseService {
             preparedStatement.close();
             databaseConnection.close();
 
-            if(password == actualPassword)
+            if(password.equals(actualPassword))
             {
-                return true;
+                return Constants.LOGIN_SUCCESSFUL;
             }else{
 
-                return false;
+                return Constants.LOGIN_FAIL;
             }
 
         } catch (SQLException e) {
@@ -91,8 +93,15 @@ public class DatabaseService {
             } catch (Exception e1) {
 
             }
-            System.out.print(e.getMessage());
-            throw new RuntimeException();
+
+            if(e.getMessage().equals("ResultSet closed"))
+            {
+                return Constants.USER_DOES_NOT_EXIST;
+
+            }else
+            {
+                throw new RuntimeException();
+            }
 
         }
     }

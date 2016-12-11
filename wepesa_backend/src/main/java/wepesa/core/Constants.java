@@ -9,6 +9,11 @@ public final class Constants
     public static final String HOST = "0.0.0.0";
     public static final int PORT = 7070;
 
+    /* Auth */
+    public static final int LOGIN_SUCCESSFUL = 0;
+    public static final int LOGIN_FAIL = 1;
+    public static final int USER_DOES_NOT_EXIST = 2;
+
     private Constants()
     {
     }

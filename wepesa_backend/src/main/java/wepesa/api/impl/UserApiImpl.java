@@ -23,6 +23,7 @@ public class UserApiImpl implements UserApi {
     public boolean loginUser(String username, String password) {
 
         boolean isLoginSuccessful = DatabaseService.readUserFromTable(username, password);
+        System.out.print(isLoginSuccessful);
         return isLoginSuccessful;
     }
 }
