@@ -65,7 +65,7 @@ public class DatabaseService {
             preparedStatement.setString(1, email);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.print(resultSet);
+            String password = resultSet.getString(4);
 
             preparedStatement.close();
             databaseConnection.close();
