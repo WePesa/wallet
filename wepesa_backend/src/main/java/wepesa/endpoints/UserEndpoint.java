@@ -116,10 +116,10 @@ public class UserEndpoint extends AbstractEndpoint {
 
             UserApi userApi = apiManager.getUserApi();
 
-            boolean isLoginSuccessful = false;
+            int loginResult;
 
             try {
-                isLoginSuccessful = userApi.loginUser(username, password);
+                loginResult = userApi.loginUser(username, password);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -127,7 +127,7 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            asyncResponse.resume(buildSuccessJsonResponse(isLoginSuccessful));
+            asyncResponse.resume(buildSuccessJsonResponse(loginResult));
         });
     }
 }
