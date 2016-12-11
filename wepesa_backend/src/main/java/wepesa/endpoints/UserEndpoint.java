@@ -1,6 +1,7 @@
 package wepesa.endpoints;
 
 import com.google.gson.reflect.TypeToken;
+import wepesa.model.User;
 import wepesa.utils.GsonProvider;
 
 import javax.ws.rs.*;
@@ -41,6 +42,23 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
+            User user = new User();
+            user.setFirstName(input.get("first_name"));
+            user.setLastName(input.get("last_name"));
+            user.setEmail(input.get("email"));
+            user.setPassword(input.get("password"));
+
+//            DreamerApi dreamerApi = blockchainApiManager.getDreamerApi();
+//
+//            try {
+//                dreamerApi.registerDreamer(dreamer);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//
+//                asyncResponse.resume(Response.status(Response.Status.INTERNAL_SERVER_ERROR).build());
+//                return;
+//            }
+//
 //            asyncResponse.resume(buildSuccessJsonResponse(id));
         });
     }

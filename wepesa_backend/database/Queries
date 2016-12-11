@@ -1,0 +1,12 @@
+Database Name - jenko_db
+
+
+CREATE TABLE  (user)
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE user(email VARCHAR PRIMARY KEY UNIQUE NOT NULL, first_name VARCHAR NOT NULL, last_name VARCHAR NOT NULL, password VARCHAR NOT NULL);
+
+INSERT INTO TABLE (dreamer)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ INSERT INTO user (email, first_name, last_name, password) VALUES ("john@doe.com", "John", "Doe", "password!");
