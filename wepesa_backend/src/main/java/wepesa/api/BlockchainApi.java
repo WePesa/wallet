@@ -1,4 +1,4 @@
-package wepesa.api.impl;
+package wepesa.api;
 
 /**
  * Created by harsh on 12/12/16.
