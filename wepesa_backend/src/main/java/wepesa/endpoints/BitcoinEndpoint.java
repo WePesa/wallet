@@ -116,6 +116,20 @@ public class BitcoinEndpoint extends AbstractEndpoint {
                 asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
                 return;
             }
+
+            BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
+
+            boolean isTransactionSuccessful;
+            try {
+                isTransactionSuccessful = bitcoinApi.sendTransaction(toAddress, fromAddress, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                asyncResponse.resume(Response.status(Response.Status.INTERNAL_SERVER_ERROR).build());
+                return;
+            }
+
+            asyncResponse.resume(buildSuccessJsonResponse(isTransactionSuccessful));
         });
     }
 }
