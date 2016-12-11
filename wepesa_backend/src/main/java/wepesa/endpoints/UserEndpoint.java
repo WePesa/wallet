@@ -39,11 +39,24 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            User user = new User();
-            user.setFirstName(input.get("first_name"));
-            user.setLastName(input.get("last_name"));
-            user.setEmail(input.get("email"));
-            user.setPassword(input.get("password"));
+            User user;
+            try {
+                user = new User();
+                user.setFirstName(input.get("first_name"));
+                user.setLastName(input.get("last_name"));
+                user.setEmail(input.get("email"));
+                user.setPassword(input.get("password"));
+            } catch (Exception e)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
+
+            if(user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
 
             UserApi userApi = apiManager.getUserApi();
 
