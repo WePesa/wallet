@@ -15,10 +15,20 @@ public class ApiManager
     }
 
     /* Blockchain APIs */
+    private UserApi userApi;
 
     private ApiManager()
     {
 
     }
 
+    public UserApi getUserApi() {
+
+        if(userApi == null)
+        {
+
+        }
+
+        return userApi;
+    }
 }
