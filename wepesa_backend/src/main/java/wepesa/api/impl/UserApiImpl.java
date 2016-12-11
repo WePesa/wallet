@@ -1,6 +1,7 @@
 package wepesa.api.impl;
 
 import wepesa.api.UserApi;
+import wepesa.data.DatabaseService;
 import wepesa.model.User;
 import wepesa.model.UserAddresses;
 
@@ -10,7 +11,10 @@ import wepesa.model.UserAddresses;
 public class UserApiImpl implements UserApi {
 
     @Override
-    public UserAddresses registerUser(User user) throws Exception {
+    public UserAddresses registerUser(User user) {
+
+        DatabaseService.insertDreamerIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
+        
         return null;
     }
 
