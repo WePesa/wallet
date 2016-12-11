@@ -1,6 +1,7 @@
 package wepesa.endpoints;
 
 import com.google.gson.reflect.TypeToken;
+import wepesa.api.BitcoinApi;
 import wepesa.api.UserApi;
 import wepesa.model.User;
 import wepesa.model.UserAddresses;
@@ -51,6 +52,25 @@ public class BitcoinEndpoint extends AbstractEndpoint {
                 return;
             }
 
+            if(address == null)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
+
+            BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
+
+            double balance;
+            try {
+                balance = bitcoinApi.getBalance(address);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                asyncResponse.resume(Response.status(Response.Status.INTERNAL_SERVER_ERROR).build());
+                return;
+            }
+
+            asyncResponse.resume(buildSuccessJsonResponse(address));
 
         });
     }
