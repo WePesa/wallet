@@ -51,7 +51,7 @@ public class DatabaseService {
         }
     }
 
-    public static void readUserFromTable(String email) {
+    public static boolean readUserFromTable(String email, String password) {
 
         Connection databaseConnection = null;
         PreparedStatement preparedStatement = null;
@@ -65,10 +65,18 @@ public class DatabaseService {
             preparedStatement.setString(1, email);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            String password = resultSet.getString(4);
+            String actualPassword = resultSet.getString(4);
 
             preparedStatement.close();
             databaseConnection.close();
+
+            if(password == actualPassword)
+            {
+                return true;
+            }else{
+
+                return false;
+            }
 
         } catch (SQLException e) {
 
