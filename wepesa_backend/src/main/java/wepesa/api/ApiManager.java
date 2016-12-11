@@ -1,5 +1,7 @@
 package wepesa.api;
 
+import wepesa.api.impl.UserApiImpl;
+
 public class ApiManager
 {
     private static ApiManager instance;
@@ -26,7 +28,7 @@ public class ApiManager
 
         if(userApi == null)
         {
-
+            userApi = new UserApiImpl();
         }
 
         return userApi;

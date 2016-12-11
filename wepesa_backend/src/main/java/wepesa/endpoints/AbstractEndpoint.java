@@ -1,5 +1,6 @@
 package wepesa.endpoints;
 
+import wepesa.api.ApiManager;
 import wepesa.core.ServerContext;
 import wepesa.utils.GsonProvider;
 
@@ -12,12 +13,12 @@ import java.util.concurrent.ExecutorService;
 public class AbstractEndpoint
 {
     protected ExecutorService workerPool;
-//    protected ApiManager blockchainApiManager;
+    protected ApiManager apiManager;
 
     public AbstractEndpoint()
     {
         workerPool = ServerContext.getInstance().getWorkerPool();
-//        blockchainApiManager = ApiManager.getInstance();
+        apiManager = ApiManager.getInstance();
     }
 
     protected Response buildSuccessJsonResponse(Object o)
