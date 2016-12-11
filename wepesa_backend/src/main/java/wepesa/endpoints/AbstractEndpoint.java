@@ -12,12 +12,12 @@ import java.util.concurrent.ExecutorService;
 public class AbstractEndpoint
 {
     protected ExecutorService workerPool;
-//    protected BlockchainApiManager blockchainApiManager;
+//    protected ApiManager blockchainApiManager;
 
     public AbstractEndpoint()
     {
         workerPool = ServerContext.getInstance().getWorkerPool();
-//        blockchainApiManager = BlockchainApiManager.getInstance();
+//        blockchainApiManager = ApiManager.getInstance();
     }
 
     protected Response buildSuccessJsonResponse(Object o)

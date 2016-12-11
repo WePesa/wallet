@@ -48,7 +48,7 @@ public class UserEndpoint extends AbstractEndpoint {
             user.setEmail(input.get("email"));
             user.setPassword(input.get("password"));
 
-//            DreamerApi dreamerApi = blockchainApiManager.getDreamerApi();
+//            UserApi dreamerApi = blockchainApiManager.getDreamerApi();
 //
 //            try {
 //                dreamerApi.registerDreamer(dreamer);
