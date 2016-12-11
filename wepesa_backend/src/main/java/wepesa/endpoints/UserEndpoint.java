@@ -108,6 +108,12 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
+            if(username == null || password == null)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
+
             UserApi userApi = apiManager.getUserApi();
 
             boolean isLoginSuccessful = false;
