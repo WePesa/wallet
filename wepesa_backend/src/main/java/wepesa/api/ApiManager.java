@@ -1,5 +1,6 @@
 package wepesa.api;
 
+import wepesa.api.impl.BitcoinApiImpl;
 import wepesa.api.impl.UserApiImpl;
 
 public class ApiManager
@@ -18,6 +19,7 @@ public class ApiManager
 
     /* Blockchain APIs */
     private UserApi userApi;
+    private BitcoinApi bitcoinApi;
 
     private ApiManager()
     {
@@ -32,5 +34,15 @@ public class ApiManager
         }
 
         return userApi;
+    }
+
+    public BitcoinApi getBitcoinApi() {
+
+        if(bitcoinApi == null)
+        {
+            bitcoinApi = new BitcoinApiImpl();
+        }
+
+        return bitcoinApi;
     }
 }

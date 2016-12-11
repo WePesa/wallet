@@ -29,6 +29,7 @@ public class BitcoinEndpoint extends AbstractEndpoint {
 
         workerPool.execute(() -> {
 
+
         });
     }
 
@@ -39,7 +40,7 @@ public class BitcoinEndpoint extends AbstractEndpoint {
     public void loginDreamer(String inputJson, @Suspended AsyncResponse asyncResponse) {
         workerPool.execute(() -> {
 
-            
+
         });
     }
 }
