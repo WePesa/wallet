@@ -11,5 +11,5 @@ public interface UserApi {
 
     UserAddresses registerUser(User user);
 
-    boolean loginUser(String username, String password);
+    int loginUser(String username, String password);
 }
