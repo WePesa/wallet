@@ -41,7 +41,7 @@ public class UserEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            asyncResponse.resume(buildSuccessJsonResponse(id));
+//            asyncResponse.resume(buildSuccessJsonResponse(id));
         });
     }
 
