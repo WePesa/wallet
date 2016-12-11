@@ -27,19 +27,14 @@ public class UserEndpoint extends AbstractEndpoint {
         workerPool.execute(() -> {
 
             Map<String, String> input = null;
-            try
-            {
-                Type type = new TypeToken<HashMap<String, String>>()
-                {
+            try {
+                Type type = new TypeToken<HashMap<String, String>>() {
                 }.getType();
                 input = GsonProvider.get().fromJson(inputJson, type);
-                if (input == null)
-                {
+                if (input == null) {
                     throw new NullPointerException();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
                 return;
             }
@@ -74,7 +69,46 @@ public class UserEndpoint extends AbstractEndpoint {
     public void loginDreamer(String inputJson, @Suspended AsyncResponse asyncResponse) {
         workerPool.execute(() -> {
 
+            Map<String, String> input = null;
+            try {
+                Type type = new TypeToken<HashMap<String, String>>() {
+                }.getType();
+                input = GsonProvider.get().fromJson(inputJson, type);
+                if (input == null) {
+                    throw new NullPointerException();
+                }
+            } catch (Exception e) {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
 
+            String username;
+            String password;
+
+            try {
+
+                username = input.get("username");
+                password = input.get("password");
+
+            } catch (Exception e) {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
+
+            UserApi userApi = apiManager.getUserApi();
+
+            boolean isLoginSuccessful = false;
+
+            try {
+                isLoginSuccessful = userApi.loginUser(username, password);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                asyncResponse.resume(Response.status(Response.Status.INTERNAL_SERVER_ERROR).build());
+                return;
+            }
+
+            asyncResponse.resume(buildSuccessJsonResponse(isLoginSuccessful));
         });
     }
 }
