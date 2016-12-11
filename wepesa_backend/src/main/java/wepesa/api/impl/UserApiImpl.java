@@ -20,10 +20,10 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public boolean loginUser(String username, String password) {
+    public int loginUser(String username, String password) {
 
-        boolean isLoginSuccessful = DatabaseService.readUserFromTable(username, password);
-        System.out.print(isLoginSuccessful);
-        return isLoginSuccessful;
+        int result = DatabaseService.readUserFromTable(username, password);
+        System.out.print(result);
+        return result;
     }
 }
