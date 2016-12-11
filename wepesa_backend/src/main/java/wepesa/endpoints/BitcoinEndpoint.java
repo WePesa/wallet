@@ -82,7 +82,40 @@ public class BitcoinEndpoint extends AbstractEndpoint {
     public void loginDreamer(String inputJson, @Suspended AsyncResponse asyncResponse) {
         workerPool.execute(() -> {
 
+            Map<String, String> input = null;
+            try {
+                Type type = new TypeToken<HashMap<String, String>>() {
+                }.getType();
+                input = GsonProvider.get().fromJson(inputJson, type);
+                if (input == null) {
+                    throw new NullPointerException();
+                }
+            } catch (Exception e) {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
 
+            String toAddress;
+            String fromAddress;
+            double amount;
+
+            try {
+
+                toAddress = input.get("to_address");
+                fromAddress = input.get("from_address");
+                amount = Double.parseDouble(input.get("amount"));
+
+            }catch (Exception e)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
+
+            if(toAddress == null || fromAddress == null || amount == null)
+            {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
         });
     }
 }
