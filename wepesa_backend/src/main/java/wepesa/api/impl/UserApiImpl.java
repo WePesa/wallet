@@ -2,6 +2,7 @@ package wepesa.api.impl;
 
 import wepesa.api.UserApi;
 import wepesa.model.User;
+import wepesa.model.UserAddresses;
 
 /**
  * Created by harsh on 11/12/16.
@@ -9,8 +10,8 @@ import wepesa.model.User;
 public class UserApiImpl implements UserApi {
 
     @Override
-    public void registerUser(User user) throws Exception {
-
+    public UserAddresses registerUser(User user) throws Exception {
+        return null;
     }
 
     @Override
