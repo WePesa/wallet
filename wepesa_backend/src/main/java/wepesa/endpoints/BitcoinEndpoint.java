@@ -111,7 +111,7 @@ public class BitcoinEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            if(toAddress == null || fromAddress == null || amount == null)
+            if(toAddress == null || fromAddress == null || amount == 0)
             {
                 asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
                 return;
