@@ -2,6 +2,7 @@ package wepesa.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import wepesa.data.DatabaseAdapter;
 
 import java.util.concurrent.ExecutorService;
 
@@ -15,6 +16,16 @@ public class ServerContext
     {
         instance = new ServerContext(workerPool);
         LOG.debug("[ServerContext initialized]");
+
+        DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
+        try
+        {
+            databaseAdapter.init();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException();
+        }
     }
 
     public static void destroy()
@@ -22,6 +33,9 @@ public class ServerContext
         getInstance().workerPool.shutdownNow();
 
         LOG.debug("[ServerContext destroyed]");
+
+        DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
+        databaseAdapter.close();
     }
 
     public static ServerContext getInstance()
