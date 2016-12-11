@@ -1,11 +1,11 @@
 package wepesa.api.impl;
 
-import wepesa.api.BlockchainApi;
+import wepesa.api.BitcoinApi;
 
 /**
  * Created by harsh on 12/12/16.
  */
-public class BlockchainApiImpl implements BlockchainApi {
+public class BitcoinApiImpl implements BitcoinApi {
 
     @Override
     public double getBalance(String address) {
