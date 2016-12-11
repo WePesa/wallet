@@ -1,5 +1,7 @@
 package wepesa.core;
 
+import wepesa.endpoints.UserEndpoint;
+import wepesa.endpoints.WalletEndpoint;
 import wepesa.logging.RequestLogger;
 import wepesa.logging.ResponseLogger;
 
@@ -24,12 +26,11 @@ public class WePesaApplication extends Application
         resources.add(RequestLogger.class);
         resources.add(ResponseLogger.class);
 
-//        /* Endpoints */
-//        resources.add(HealthEndPoint.class);
-//        resources.add(DreamerEndPoint.class);
-//        resources.add(SupporterEndPoint.class);
-//        resources.add(CampaignEndPoint.class);
-//
+        /* Endpoints */
+        resources.add(HealthEndPoint.class);
+        resources.add(UserEndpoint.class);
+        resources.add(WalletEndpoint.class);
+
         /* Error Handler */
         resources.add(DefaultExceptionHandler.class);
 
