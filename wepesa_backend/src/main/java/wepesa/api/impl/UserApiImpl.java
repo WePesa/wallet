@@ -22,7 +22,7 @@ public class UserApiImpl implements UserApi {
     @Override
     public boolean loginUser(String username, String password) {
 
-        DatabaseService.readUserFromTable(username);
-        return false;
+        boolean isLoginSuccessful = DatabaseService.readUserFromTable(username, password);
+        return isLoginSuccessful;
     }
 }
