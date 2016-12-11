@@ -29,6 +29,18 @@ public class BitcoinEndpoint extends AbstractEndpoint {
 
         workerPool.execute(() -> {
 
+            Map<String, String> input = null;
+            try {
+                Type type = new TypeToken<HashMap<String, String>>() {
+                }.getType();
+                input = GsonProvider.get().fromJson(inputJson, type);
+                if (input == null) {
+                    throw new NullPointerException();
+                }
+            } catch (Exception e) {
+                asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
+                return;
+            }
 
         });
     }
