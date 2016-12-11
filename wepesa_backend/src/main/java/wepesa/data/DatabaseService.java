@@ -10,7 +10,7 @@ public class DatabaseService {
     public static final String INSERT_USER = "INSERT INTO user (email, first_name, last_name, password) VALUES (?, ?, ?, ?);";
 
 
-    public static void insertDreamerIntoTable(String email, String first_name, String last_name, String password) {
+    public static void insertUserIntoTable(String email, String first_name, String last_name, String password) {
 
         Connection databaseConnection = null;
         PreparedStatement preparedStatement = null;
@@ -44,7 +44,7 @@ public class DatabaseService {
             } catch (Exception e1) {
 
             }
-
+                System.out.print(e.getMessage());
                 throw new RuntimeException();
 
         }

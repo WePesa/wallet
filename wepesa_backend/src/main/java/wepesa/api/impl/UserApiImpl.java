@@ -13,8 +13,8 @@ public class UserApiImpl implements UserApi {
     @Override
     public UserAddresses registerUser(User user) {
 
-        DatabaseService.insertDreamerIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
-        
+        DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
+
         return null;
     }
 
