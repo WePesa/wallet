@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("health-check")
-public class HealthEndPoint extends AbstractEndpoint {
+public class HealthEndpoint extends AbstractEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public void healthCheck(@Suspended AsyncResponse asyncResponse) {

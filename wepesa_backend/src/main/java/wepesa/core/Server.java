@@ -2,6 +2,10 @@ package wepesa.core;
 
 
 import jersey.repackaged.com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
 import org.glassfish.grizzly.strategies.WorkerThreadIOStrategy;
 import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -13,12 +17,6 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class Server
 {
@@ -48,7 +46,7 @@ public class Server
 
         server.start();
 
-        LOG.debug("[WePesa Server started at " + BASE_URI.toString() + "]");
+        LOG.debug("[WePesa Application Server started at " + BASE_URI.toString() + "]");
 
         Runtime.getRuntime().addShutdownHook(new Thread()
         {
@@ -70,7 +68,7 @@ public class Server
 
     public static void shutdown(HttpServer server)
     {
-        LOG.debug("[WePesa Server stopped]");
+        LOG.debug("[WePesa Application Server stopped]");
         ServerContext.destroy();
         server.shutdownNow();
     }

@@ -1,9 +1,9 @@
 package wepesa.core;
 
-
-import java.util.concurrent.ExecutorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.ExecutorService;
 
 public class ServerContext
 {
@@ -15,8 +15,6 @@ public class ServerContext
     {
         instance = new ServerContext(workerPool);
         LOG.debug("[ServerContext initialized]");
-
-
     }
 
     public static void destroy()
