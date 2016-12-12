@@ -2,6 +2,7 @@ package wepesa.endpoints;
 
 import com.google.gson.reflect.TypeToken;
 import wepesa.api.EtherApi;
+import wepesa.api.ZCashApi;
 import wepesa.utils.GsonProvider;
 
 import javax.ws.rs.Consumes;
@@ -55,11 +56,11 @@ public class ZCashEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            EtherApi etherApi = apiManager.getEtherApi();
+            ZCashApi zCashApi = apiManager.getZCashApi();
 
             double balance;
             try {
-                balance = etherApi.getBalance(address);
+                balance = zCashApi.getBalance(address);
             } catch (Exception e) {
                 e.printStackTrace();
 
