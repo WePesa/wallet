@@ -115,11 +115,11 @@ public class EtherEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
+            EtherApi etherApi = apiManager.getEtherApi();
 
             boolean isTransactionSuccessful;
             try {
-                isTransactionSuccessful = bitcoinApi.sendTransaction(toAddress, fromAddress, amount);
+                isTransactionSuccessful = etherApi.sendTransaction(toAddress, fromAddress, amount);
             } catch (Exception e) {
                 e.printStackTrace();
 
