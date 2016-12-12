@@ -115,11 +115,11 @@ public class ZCashEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            EtherApi etherApi = apiManager.getEtherApi();
+            ZCashApi zCashApi = apiManager.getZCashApi();
 
             boolean isTransactionSuccessful;
             try {
-                isTransactionSuccessful = etherApi.sendTransaction(toAddress, fromAddress, amount);
+                isTransactionSuccessful = zCashApi.sendTransaction(toAddress, fromAddress, amount);
             } catch (Exception e) {
                 e.printStackTrace();
 
