@@ -1,5 +1,6 @@
 package wepesa.core;
 
+import wepesa.endpoints.BitcoinEndpoint;
 import wepesa.endpoints.HealthEndpoint;
 import wepesa.endpoints.UserEndpoint;
 import wepesa.logging.RequestLogger;
@@ -29,6 +30,7 @@ public class WePesaApplication extends Application
         /* Endpoints */
         resources.add(HealthEndpoint.class);
         resources.add(UserEndpoint.class);
+        resources.add(BitcoinEndpoint.class);
 
         /* Error Handler */
         resources.add(DefaultExceptionHandler.class);
