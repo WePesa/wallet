@@ -2,6 +2,7 @@ package wepesa.endpoints;
 
 import com.google.gson.reflect.TypeToken;
 import wepesa.api.BitcoinApi;
+import wepesa.api.EtherApi;
 import wepesa.utils.GsonProvider;
 
 import javax.ws.rs.Consumes;
@@ -55,11 +56,11 @@ public class EtherEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
+            EtherApi etherApi = apiManager.getEtherApi();
 
             double balance;
             try {
-                balance = bitcoinApi.getBalance(address);
+                balance = etherApi.getBalance(address);
             } catch (Exception e) {
                 e.printStackTrace();
 
