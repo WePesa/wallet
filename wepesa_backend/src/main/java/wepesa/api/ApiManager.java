@@ -3,6 +3,7 @@ package wepesa.api;
 import wepesa.api.impl.BitcoinApiImpl;
 import wepesa.api.impl.EtherApiImpl;
 import wepesa.api.impl.UserApiImpl;
+import wepesa.api.impl.ZCashApiImpl;
 
 public class ApiManager
 {
@@ -22,6 +23,7 @@ public class ApiManager
     private UserApi userApi;
     private BitcoinApi bitcoinApi;
     private EtherApi etherApi;
+    private ZCashApi zCashApi;
 
     private ApiManager()
     {
@@ -56,5 +58,15 @@ public class ApiManager
         }
 
         return etherApi;
+    }
+
+    public ZCashApi getZCashApi() {
+
+        if(zCashApi == null)
+        {
+            zCashApi = new ZCashApiImpl();
+        }
+
+        return zCashApi;
     }
 }
