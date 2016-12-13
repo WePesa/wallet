@@ -41,7 +41,7 @@ public class BitcoinClient {
     public String getBalance(String address) throws Exception{
 
         Request request = new Request.Builder()
-                .url("https://block.io/api/v2/get_new_address/?api_key=" + API_KEY)
+                .url("https://block.io/api/v2/get_address_balance/?api_key=" + API_KEY + "&addresses= " + address)
                 .build();
 
         Response response = okHttpClient.newCall(request).execute();
