@@ -1,5 +1,7 @@
 package wepesa.api.impl;
 
+import wepesa.api.ApiManager;
+import wepesa.api.BitcoinApi;
 import wepesa.api.UserApi;
 import wepesa.data.DatabaseService;
 import wepesa.model.User;
@@ -15,7 +17,6 @@ public class UserApiImpl implements UserApi {
 
         DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
 
-        // TODO -- Create new addresses on all nodes
         return null;
     }
 
