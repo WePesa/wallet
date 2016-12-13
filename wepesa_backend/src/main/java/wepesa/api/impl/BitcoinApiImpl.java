@@ -16,4 +16,9 @@ public class BitcoinApiImpl implements BitcoinApi {
     public boolean sendTransaction(String toAddress, String fromAddress, double amount) {
         return false;
     }
+
+    @Override
+    public String getNewAddress() {
+        return null;
+    }
 }
