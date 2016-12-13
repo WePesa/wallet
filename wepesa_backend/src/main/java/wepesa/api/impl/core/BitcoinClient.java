@@ -16,15 +16,12 @@ public class BitcoinClient {
     private static BitcoinClient instance;
     private static OkHttpClient okHttpClient;
 
-    private BitcoinClient()
-    {
+    private BitcoinClient() {
         okHttpClient = new OkHttpClient();
     }
 
-    public static BitcoinClient getInstance()
-    {
-        if (instance == null)
-        {
+    public static BitcoinClient getInstance() {
+        if (instance == null) {
             instance = new BitcoinClient();
         }
 
@@ -32,6 +29,17 @@ public class BitcoinClient {
     }
 
     public String getNewBitcoinAddress() throws IOException {
+        Request request = new Request.Builder()
+                .url("https://block.io/api/v2/get_new_address/?api_key=" + API_KEY)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+        System.out.print(response);
+        return response.body().string();
+    }
+
+    public String getBalance(String address) throws Exception{
+
         Request request = new Request.Builder()
                 .url("https://block.io/api/v2/get_new_address/?api_key=" + API_KEY)
                 .build();
