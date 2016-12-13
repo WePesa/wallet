@@ -37,6 +37,7 @@ public class BitcoinClient {
                 .build();
 
         Response response = okHttpClient.newCall(request).execute();
+        System.out.print(response);
         return response;
     }
 }
