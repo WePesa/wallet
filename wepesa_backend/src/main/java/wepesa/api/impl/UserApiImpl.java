@@ -17,7 +17,14 @@ public class UserApiImpl implements UserApi {
 
         DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
 
-        return null;
+        ApiManager apiManager = ApiManager.getInstance();
+        BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
+        String btcAddress = bitcoinApi.getNewAddress();
+
+        UserAddresses userAddresses = new UserAddresses();
+        userAddresses.setBtcAddress(btcAddress);
+
+        return userAddresses;
     }
 
     @Override
