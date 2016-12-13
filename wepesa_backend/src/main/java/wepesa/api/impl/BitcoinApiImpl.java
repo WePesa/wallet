@@ -24,6 +24,6 @@ public class BitcoinApiImpl implements BitcoinApi {
     public String getNewAddress() throws Exception {
 
         BitcoinClient bitcoinClient = BitcoinClient.getInstance();
-        bitcoinClient.getNewBitcoinAddress();
+        return bitcoinClient.getNewBitcoinAddress();
     }
 }
