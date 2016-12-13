@@ -13,7 +13,7 @@ import wepesa.model.UserAddresses;
 public class UserApiImpl implements UserApi {
 
     @Override
-    public UserAddresses registerUser(User user) {
+    public UserAddresses registerUser(User user) throws Exception {
 
         DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
 

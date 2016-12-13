@@ -9,7 +9,7 @@ import wepesa.model.UserAddresses;
  */
 public interface UserApi {
 
-    UserAddresses registerUser(User user);
+    UserAddresses registerUser(User user) throws Exception;
 
     int loginUser(String username, String password);
 }
