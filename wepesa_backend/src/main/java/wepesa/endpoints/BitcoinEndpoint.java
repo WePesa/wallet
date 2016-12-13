@@ -60,9 +60,9 @@ public class BitcoinEndpoint extends AbstractEndpoint {
 
             BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
 
-            double balance;
+            String response;
             try {
-                balance = bitcoinApi.getBalance(address);
+                response = bitcoinApi.getBalance(address);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -70,7 +70,7 @@ public class BitcoinEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            asyncResponse.resume(buildSuccessJsonResponse(address));
+            asyncResponse.resume(buildSuccessJsonResponse(response));
 
         });
     }
