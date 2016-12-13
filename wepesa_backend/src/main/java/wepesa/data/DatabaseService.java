@@ -13,7 +13,7 @@ public class DatabaseService {
     public static final String FIND_USER = "SELECT * FROM user WHERE email = ?";
 
 
-    public static void insertUserIntoTable(String email, String first_name, String last_name, String password) {
+    public static int insertUserIntoTable(String email, String first_name, String last_name, String password) {
 
         Connection databaseConnection = null;
         PreparedStatement preparedStatement = null;
@@ -34,6 +34,8 @@ public class DatabaseService {
             preparedStatement.close();
             databaseConnection.close();
 
+            return Constants.USER_INSERTED;
+
         } catch (SQLException e) {
 
             try {
@@ -47,7 +49,11 @@ public class DatabaseService {
             } catch (Exception e1) {
 
             }
-                System.out.print(e.getMessage());
+                if(e.getErrorCode() == 19)
+                {
+                    return Constants.USER_EMAIL_EXISTS;
+                }
+
                 throw new RuntimeException();
 
         }

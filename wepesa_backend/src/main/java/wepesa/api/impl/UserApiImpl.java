@@ -3,6 +3,7 @@ package wepesa.api.impl;
 import wepesa.api.ApiManager;
 import wepesa.api.BitcoinApi;
 import wepesa.api.UserApi;
+import wepesa.core.Constants;
 import wepesa.data.DatabaseService;
 import wepesa.model.User;
 import wepesa.model.UserAddresses;
@@ -15,7 +16,12 @@ public class UserApiImpl implements UserApi {
     @Override
     public UserAddresses registerUser(User user) throws Exception {
 
-        DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
+        int insertionResult = DatabaseService.insertUserIntoTable(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword());
+
+        if(insertionResult == Constants.USER_EMAIL_EXISTS)
+        {
+            return null;
+        }
 
         ApiManager apiManager = ApiManager.getInstance();
         BitcoinApi bitcoinApi = apiManager.getBitcoinApi();

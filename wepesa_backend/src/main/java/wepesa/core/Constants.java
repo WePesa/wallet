@@ -14,6 +14,10 @@ public final class Constants
     public static final int LOGIN_FAIL = 1;
     public static final int USER_DOES_NOT_EXIST = 2;
 
+    /* Register User */
+    public static final int USER_INSERTED = 0;
+    public static final int USER_EMAIL_EXISTS = 1;
+
     private Constants()
     {
     }
