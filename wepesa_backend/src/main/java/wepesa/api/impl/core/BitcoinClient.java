@@ -31,7 +31,7 @@ public class BitcoinClient {
         return instance;
     }
 
-    public static Response getNewBitcoinAddress() throws IOException {
+    public Response getNewBitcoinAddress() throws IOException {
         Request request = new Request.Builder()
                 .url("https://block.io/api/v2/get_new_address/?api_key=" + API_KEY)
                 .build();
