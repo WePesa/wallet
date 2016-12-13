@@ -11,8 +11,10 @@ import java.io.IOException;
 public class BitcoinApiImpl implements BitcoinApi {
 
     @Override
-    public double getBalance(String address) {
-        return 0;
+    public String getBalance(String address) throws Exception {
+
+        BitcoinClient bitcoinClient = BitcoinClient.getInstance();
+        return bitcoinClient.getBalance(address);
     }
 
     @Override

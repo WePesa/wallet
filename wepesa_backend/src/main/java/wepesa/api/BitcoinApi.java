@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public interface BitcoinApi {
 
-    double getBalance(String address);
+    double getBalance(String address) throws Exception;
 
     boolean sendTransaction(String toAddress, String fromAddress, double amount);
 
