@@ -107,6 +107,7 @@ public class BitcoinEndpoint extends AbstractEndpoint {
 
             }catch (Exception e)
             {
+                //
                 asyncResponse.resume(Response.status(Response.Status.BAD_REQUEST).build());
                 return;
             }
