@@ -35,7 +35,7 @@ public class DatabaseAdapter {
 
         comboPooledDataSource = new ComboPooledDataSource();
         comboPooledDataSource.setDriverClass("org.sqlite.JDBC");
-        comboPooledDataSource.setJdbcUrl("jdbc:sqlite:/Users/harsh/workspace/Ethereum/wallet/wepesa_backend/database/wepesa_db");
+        comboPooledDataSource.setJdbcUrl("jdbc:sqlite:/home/wepesa_db");
 
         comboPooledDataSource.setMaxPoolSize(50);
         comboPooledDataSource.setMinPoolSize(5);
