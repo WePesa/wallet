@@ -2,6 +2,7 @@ package wepesa.api.impl;
 
 import wepesa.api.ApiManager;
 import wepesa.api.BitcoinApi;
+import wepesa.api.EtherApi;
 import wepesa.api.UserApi;
 import wepesa.core.Constants;
 import wepesa.data.DatabaseService;
@@ -30,6 +31,8 @@ public class UserApiImpl implements UserApi {
         UserAddresses userAddresses = new UserAddresses();
         userAddresses.setBtcAddress(btcAddress);
 //        userAddresses.setEthAddress("sdjhgdhgkdjdfnkfdsbkjs");
+
+        EtherApi etherApi = apiManager.getEtherApi();
 
         return userAddresses;
     }

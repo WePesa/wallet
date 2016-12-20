@@ -8,4 +8,6 @@ public interface EtherApi {
     double getBalance(String address);
 
     boolean sendTransaction(String toAddress, String fromAddress, double amount);
+
+    String getNewAddress() throws Exception;
 }
