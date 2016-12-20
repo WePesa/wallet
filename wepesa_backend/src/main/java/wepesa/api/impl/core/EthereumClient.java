@@ -41,7 +41,7 @@ public class EthereumClient {
     public String getBalance(String address) throws Exception{
 
         Request request = new Request.Builder()
-                .url("https://block.io/api/v2/get_address_balance/?api_key=" + API_KEY + "&addresses= " + address)
+                .url("https://api.blockcypher.com/v1/eth/main/addrs/" + address + "/balance")
                 .build();
 
         Response response = okHttpClient.newCall(request).execute();
