@@ -10,8 +10,10 @@ import wepesa.api.impl.core.EthereumClient;
 public class EtherApiImpl implements EtherApi {
 
     @Override
-    public double getBalance(String address) {
-        return 0;
+    public String getBalance(String address) throws Exception {
+
+        EthereumClient ethereumClient = EthereumClient.getInstance();
+        return ethereumClient.getBalance(address);
     }
 
     @Override
