@@ -28,11 +28,12 @@ public class UserApiImpl implements UserApi {
         BitcoinApi bitcoinApi = apiManager.getBitcoinApi();
         String btcAddress = bitcoinApi.getNewAddress();
 
+        EtherApi etherApi = apiManager.getEtherApi();
+        String ethAddress = etherApi.getNewAddress();
+
         UserAddresses userAddresses = new UserAddresses();
         userAddresses.setBtcAddress(btcAddress);
-//        userAddresses.setEthAddress("sdjhgdhgkdjdfnkfdsbkjs");
-
-        EtherApi etherApi = apiManager.getEtherApi();
+        userAddresses.setBtcAddress(ethAddress);
 
         return userAddresses;
     }
