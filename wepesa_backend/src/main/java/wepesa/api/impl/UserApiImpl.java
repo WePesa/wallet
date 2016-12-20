@@ -33,7 +33,7 @@ public class UserApiImpl implements UserApi {
 
         UserAddresses userAddresses = new UserAddresses();
         userAddresses.setBtcAddress(btcAddress);
-        userAddresses.setBtcAddress(ethAddress);
+        userAddresses.setEthAddress(ethAddress);
 
         return userAddresses;
     }
