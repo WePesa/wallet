@@ -17,4 +17,9 @@ public class EtherApiImpl implements EtherApi {
     public boolean sendTransaction(String toAddress, String fromAddress, double amount) {
         return false;
     }
+
+    @Override
+    public String getNewAddress() throws Exception {
+        return null;
+    }
 }
