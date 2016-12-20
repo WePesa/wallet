@@ -5,7 +5,7 @@ package wepesa.api;
  */
 public interface EtherApi {
 
-    double getBalance(String address);
+    String getBalance(String address);
 
     boolean sendTransaction(String toAddress, String fromAddress, double amount);
 

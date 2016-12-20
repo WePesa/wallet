@@ -30,11 +30,10 @@ public class UserApiImpl implements UserApi {
 
         EtherApi etherApi = apiManager.getEtherApi();
         String ethAddress = etherApi.getNewAddress();
-        System.out.print(ethAddress);
 
         UserAddresses userAddresses = new UserAddresses();
         userAddresses.setBtcAddress(btcAddress);
-//        userAddresses.setEthAddress(ethAddress);
+        userAddresses.setEthAddress(ethAddress);
 
         return userAddresses;
     }
