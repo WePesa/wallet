@@ -58,9 +58,9 @@ public class EtherEndpoint extends AbstractEndpoint {
 
             EtherApi etherApi = apiManager.getEtherApi();
 
-            double balance;
+            String response;
             try {
-                balance = etherApi.getBalance(address);
+                response = etherApi.getBalance(address);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -68,7 +68,7 @@ public class EtherEndpoint extends AbstractEndpoint {
                 return;
             }
 
-            asyncResponse.resume(buildSuccessJsonResponse(address));
+            asyncResponse.resume(buildSuccessJsonResponse(response));
 
         });
     }
