@@ -2,6 +2,7 @@ package wepesa.api.impl;
 
 import wepesa.api.BitcoinApi;
 import wepesa.api.EtherApi;
+import wepesa.api.impl.core.EthereumClient;
 
 /**
  * Created by harsh on 12/12/16.
@@ -20,6 +21,8 @@ public class EtherApiImpl implements EtherApi {
 
     @Override
     public String getNewAddress() throws Exception {
-        return null;
+
+        EthereumClient ethereumClient = EthereumClient.getInstance();
+        return ethereumClient.getNewEthereumAddress();
     }
 }
