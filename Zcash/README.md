@@ -6,4 +6,4 @@
  
  zcashd-rpc.js runs on [node](nodejs.org), and can be installed via [npm](http://npmjs.org)
  
-    `npm install zcashd-rpc`
+    npm install zcashd-rpc
