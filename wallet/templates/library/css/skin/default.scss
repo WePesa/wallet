@@ -1,0 +1,881 @@
+﻿/* -----------------------------------------------------------------------------
+
+	TABLE OF CONTENTS
+
+	1.) General
+	2.) Components
+	3.) Header
+	4.) Main Slider
+	5.) Core
+	6.) Sidebar
+	7.) Bottom Panel
+	8.) Footer
+	9.) Other
+	10.) Responsive
+
+----------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------------
+
+    1.) GENERAL
+
+----------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+		COLORS
+	-------------------------------------------------------------------------- */
+
+	// MAIN PALETTE
+	$color-1: #ff007c; // primary accent color
+	$color-2: #099db3; // secondary accent color
+	$color-3: #edcf56; // minor accents
+	$x-soft-gray: #eeeeee; // very soft backgrounds
+	$soft-gray: #e1e1e1; // dividers
+	$medium-gray: #d0d0d0; // soft background
+	$dark-gray: #3f3f3f; // titles, strong text
+	$x-dark-gray: #1a1a1a; // titles, strong text on bright bg
+
+	// GENERAL
+	$body-bg: #FFF;
+	$body-font: #585858;
+	$link: $color-1;
+
+	// HEADER
+	$header-bg-image: '../../../images/header_bg.jpg';
+	$header-animated-image: '../../img/header_bg_default.png';
+	$header-font: #FFF;
+	$header-submenu-bg: #FFF;
+	$header-submenu-font: #3f3f3f;
+
+	// CORE
+	$core-bg-1: '../../../images/core_bg_01.jpg';
+	$core-bg-2: '../../../images/core_bg_02.jpg';
+
+	// BOTTOM PANEL
+	$bottom-panel-bg: #000;
+	$bottom-panel-bg-image: '../../../images/bottom_bg.png';
+	$bottom-panel-title: $color-1;
+	$bottom-panel-font: #FFF;
+
+
+	/* -------------------------------------------------------------------------
+		MIXINS
+	-------------------------------------------------------------------------- */
+
+	// BOX SHADOW
+	@mixin box-shadow ( $shadow1, $shadow2:false ) {
+		$params: $shadow1;
+		@if $shadow2 { $params: $shadow1, $shadow2; }
+		-moz-box-shadow: $params;
+		-webkit-box-shadow: $params;
+		box-shadow: $params;
+	}
+
+	// DOTS PAGINATION
+	@mixin dots-pagination {
+		.owl-page { border-color: $color-1; }
+		.owl-page.active,
+		.owl-page:hover { background-color: $color-1; }
+	}
+
+	// HEADINGS
+	@mixin heading-2 { color: $dark-gray;
+		&:before { background-color: $color-1; }
+	}
+	@mixin heading-3 { color: $dark-gray; }
+
+	// HORIZONTAL GRADIENT
+	@mixin horizontal-gradient( $from, $to ) {
+		background-image: -webkit-gradient( linear, left top, right top, from( $from ), to( $to ) );
+		background-image: -webkit-linear-gradient( left, $from, $to );
+		background-image:    -moz-linear-gradient( left, $from, $to );
+		background-image:      -o-linear-gradient( left, $from, $to );
+		background-image:         linear-gradient( to right, $from, $to );
+	}
+
+	// IMAGE OVERLAY
+	@mixin image-overlay {
+		&:before { background-color: $color-1; background-color: rgba( $color-1, .5 ); @include vertical-gradient( rgba( $color-2, .6 ), transparent ); }
+		&:after { color: #FFF; }
+	}
+
+	// INPUT PLACEHOLDER
+	@mixin input-placeholder ( $color ) {
+		&::-webkit-input-placeholder { color: $color; }
+		&:-moz-placeholder { color: $color; }
+		&::-moz-placeholder { color: $color; }
+		&:-ms-input-placeholder { color: $color; }
+	}
+
+	// TEXT SHADOWS
+	@mixin text-shadow-dark {
+		text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	}
+	@mixin text-shadow-light {
+		text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+	}
+
+	// VERTICAL GRADIENT
+	@mixin vertical-gradient( $from, $to ) {
+		background-image: -webkit-gradient( linear, left top, left bottom, from( $from ), to( $to ) );
+		background-image: -webkit-linear-gradient( top, $from, $to );
+		background-image:    -moz-linear-gradient( top, $from, $to );
+		background-image:      -o-linear-gradient( top, $from, $to );
+		background-image:         linear-gradient( to bottom, $from, $to );
+	}
+
+	/* -------------------------------------------------------------------------
+		DEFAULTS
+	------------------------------------------------------------------------- */
+
+	body { color: $body-font; background-color: $body-bg; }
+	a, a:hover, a:active, a:focus { color: $color-1; }
+	a:hover { border-color: $color-1; }
+
+	/* -------------------------------------------------------------------------
+        VARIOUS CONTENT / TYPOGRAPHY
+	------------------------------------------------------------------------- */
+
+	.various-content  {
+
+		// HEADINGS
+		h2 { @include heading-2; }
+		h3,h4,h5, h6 { color: $dark-gray; }
+
+		// UNORDERED LIST
+		ul > li:before { background-color: $dark-gray; }
+		ul > li > ul > li:before { background-color: $medium-gray; }
+
+		// TABLE
+		table th { color: $dark-gray; }
+		table tbody tr:nth-child(odd) td { background-color: $x-soft-gray; }
+
+	}
+
+	// STANDALONE HEADINGS
+	.heading-2 { @include heading-2; }
+	.heading-3 { @include heading-3; }
+
+	/* -------------------------------------------------------------------------
+		FORMS
+	------------------------------------------------------------------------- */
+
+	.default-form {
+
+		label { color: $dark-gray; }
+		label > span { color: $color-1; }
+		input, textarea, select, .selectbox-input .toggle { color: $body-font; background-color: $x-soft-gray; }
+		input.m-type-2, textarea.m-type-2, select.m-type-2 { border-color: $soft-gray; background-color: transparent; }
+		input.m-error, textarea.m-error, select.m-error { background-color: #ffdfe0; }
+
+		// DATEPICKER INPUT
+		.datepicker-input > i { color: $color-1; }
+
+		// CHECKBOXES
+		.checkbox-input {
+			label { color: $body-font; }
+			label:before { color: $medium-gray; }
+			&.m-checked label:before { color: $color-1; }
+		}
+
+		// SELECTBOX INPUT
+		.selectbox-input {
+			.toggle:after { color: $color-1; }
+			.fake-selectbox { background-color: $x-soft-gray; @include box-shadow( 0 3px 3px rgba( #000, .1 ) ); }
+			.fake-selectbox > li:hover { color: #FFF; background-color: $color-1; }
+		}
+		.selectbox-input.m-type-2 {
+			.toggle { border-color: $medium-gray; background-color: $body-bg; }
+			.fake-selectbox { border-color: $medium-gray; background-color: $body-bg; }
+		}
+
+		// QUANTITY INPUT
+		.quantity-input {
+			.plus,
+			.minus { color: #FFF; background-color: $color-1; }
+			.plus:hover,
+			.minus:hover { @include box-shadow( inset 0 0 0 10px rgba( #FFF, .2 ) ); }
+		}
+
+		// FORM NOTE
+		.form-note { border-color: $soft-gray; }
+		.form-note span { color: $color-1; }
+
+	}
+
+	/* -------------------------------------------------------------------------
+		UTILITY CLASSES
+	------------------------------------------------------------------------- */
+
+	.lead { color: $dark-gray; }
+
+
+/* -----------------------------------------------------------------------------
+
+    2.) COMPONENTS
+
+----------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+		ACCORDION
+	------------------------------------------------------------------------- */
+
+	.various-content .c-accordion,
+	.c-accordion {
+		> li { border-color: $soft-gray; }
+		.accordion-title { color: $dark-gray; }
+		.accordion-title:before { color: $color-1; }
+		.accordion-price { color: $color-1; }
+		.accordion-price .sale-price { color: $color-2; }
+		.accordion-price .strikethrough { color: $body-font; }
+	}
+	.various-content .c-accordion.m-radio-group,
+	.c-accordion.m-radio-group {
+		.accordion-title:before { color: $medium-gray; }
+		> li.m-active .accordion-title:before { color: $color-1; }
+	}
+
+	/* -------------------------------------------------------------------------
+		ALERT MESSAGES
+	------------------------------------------------------------------------- */
+
+	.c-alert-message.m-warning { color: #d40041; background-color: #ffdfe0; }
+	.c-alert-message.m-success { color: #499143; background-color: #d4fbd3; }
+	.c-alert-message.m-info { color: #265e88; background-color: #e1edf9; }
+	.c-alert-message.m-notification { color: #c88435; background-color: #fff4cf; }
+
+	/* -------------------------------------------------------------------------
+		ARTICLE
+	------------------------------------------------------------------------- */
+
+	.c-article .article-image a { @include image-overlay; }
+
+	/* -------------------------------------------------------------------------
+		BUTTONS
+	------------------------------------------------------------------------- */
+
+	.c-button { color: #FFF; background-color: $color-1; @include vertical-gradient( rgba( $color-2, .2 ), transparent );
+
+		&:hover { color: #FFF; @include box-shadow( inset 0 0 30px 0 rgba( $color-2, 0.35 ) ); }
+		&:active { color: #FFF; @include box-shadow( inset 0 0 30px 0 rgba( $color-2, 0.65 ) ); }
+		&.m-color-2 { background-color: $color-2; @include vertical-gradient( rgba( $color-1, .2 ), transparent ); }
+		&.m-color-2:hover { @include box-shadow( inset 0 0 30px 0 rgba( $color-1, 0.35 ) ); }
+		&.m-color-2:active { @include box-shadow( inset 0 0 30px 0 rgba( $color-1, 0.65 ) ); }
+		&.m-color-3 { background-color: $dark-gray; @include vertical-gradient( rgba( #FFF, .1 ), transparent ); }
+		&.m-color-3:hover { @include box-shadow( inset 0 0 30px 0 rgba( #FFF, 0.25 ) ); }
+		&.m-color-3:active { @include box-shadow( inset 0 0 30px 0 rgba( #FFF, 0.55 ) ); }
+
+		// TYPE 2
+		&.m-type-2 { color: $color-1; border-color: $color-1; background-color: transparent; background-image: none; @include box-shadow( none ); }
+		&.m-type-2:hover { border-color: rgba( $color-1, .4 ); @include box-shadow( none ); }
+		&.m-type-2:active { border-color: rgba( $color-1, .2 ); @include box-shadow( none ); }
+		&.m-type-2.m-color-2 { color: $color-2; border-color: $color-2; }
+		&.m-type-2.m-color-2:hover { border-color: rgba( $color-2, .4 ); @include box-shadow( none ); }
+		&.m-type-2.m-color-2:active { border-color: rgba( $color-2, .2 ); @include box-shadow( none ); }
+		&.m-type-2.m-color-3 { color: $dark-gray; border-color: $dark-gray; }
+		&.m-type-2.m-color-3:hover { border-color: rgba( $dark-gray, .4 ); @include box-shadow( none ); }
+		&.m-type-2.m-color-3:active { border-color: rgba( $dark-gray, .2 ); @include box-shadow( none ); }
+
+	}
+
+	/* -------------------------------------------------------------------------
+		CTA MESSAGE
+	------------------------------------------------------------------------- */
+
+	.c-cta-message { background-color: $x-soft-gray; }
+
+	/* -------------------------------------------------------------------------
+		DIVIDER
+	------------------------------------------------------------------------- */
+
+	.c-divider { border-color: $soft-gray; }
+	.c-divider.m-transparent { border-color: transparent; }
+
+	/* -------------------------------------------------------------------------
+		GALLERY
+	------------------------------------------------------------------------- */
+
+	.c-gallery {
+		.thumb a { @include image-overlay; }
+		.owl-controls { @include dots-pagination; }
+	}
+
+	/* -------------------------------------------------------------------------
+		ICON BLOCK
+	------------------------------------------------------------------------- */
+
+	.c-icon-block > .ico { color: $color-1 }
+
+	/* -------------------------------------------------------------------------
+		LOADING ANIM
+	------------------------------------------------------------------------- */
+
+	.c-loading-anim { background-color: $medium-gray;
+		> span { background-image: url( '../../img/loader_2x.gif' );
+			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../../img/loader_2x.gif', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../../img/loader_2x.gif', sizingMethod='scale')";
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+		MODAL
+	------------------------------------------------------------------------- */
+
+	.c-modal { background-color: rgba( $color-1, .5 ); @include vertical-gradient( rgba( $color-2, .5 ), transparent );
+		.modal-loading .c-loading-anim { border-color: #FFF; border-color: rgba( #FFF, .2 ); background-color: transparent; }
+		.modal-box { background-color: $body-bg; }
+		.modal-close { color: #FFF; background-color: $color-1; }
+		.modal-close:hover { @include box-shadow( inset 0 0 10px 0 rgba( $color-2, 0.35 ) ); }
+		.modal-close:active { @include box-shadow( inset 0 0 10px 0 rgba( $color-2, 0.65 ) ); }
+	}
+
+	/* -------------------------------------------------------------------------
+		PAGINATION
+	------------------------------------------------------------------------- */
+
+	.c-pagination > li > a { color: $body-font; border-color: $soft-gray; }
+	.c-pagination > li.m-active > a { color: #FFF; background-color: $color-1; @include vertical-gradient( rgba( $color-2, .2 ), transparent ); }
+	.c-pagination > li > a:hover { border-color: $medium-gray; }
+
+	/* -------------------------------------------------------------------------
+		PRICING TABLE
+	------------------------------------------------------------------------- */
+
+	.various-content .c-pricing-table,
+	.c-pricing-table { border-color: $soft-gray;
+		.table-header { border-color: $soft-gray; }
+		.table-price { color: $color-1; }
+		.table-price > span { color: $dark-gray; }
+		.table-content { border-color: $body-bg; @include vertical-gradient( rgba( #000, 0.05 ) 0%, rgba( 0, 0, 0, 0 ) 50% ); }
+	}
+
+	/* -------------------------------------------------------------------------
+		PROGRESS BAR
+	------------------------------------------------------------------------- */
+
+	.c-progress-bar { border-color: $x-soft-gray;  background-color: $x-soft-gray; }
+	.c-progress-bar > span { background-color: $color-1; @include horizontal-gradient( rgba( $color-2, .5 ), transparent ); }
+	.c-progress-bar.m-color-2 > span { background-color: $color-2; @include horizontal-gradient( rgba( $color-1, .5 ), transparent ); }
+	.c-progress-bar.m-color-3 > span { background-color: $dark-gray; @include horizontal-gradient( rgba( #FFF, .3 ), transparent ); }
+
+	/* -------------------------------------------------------------------------
+		SEARCH FORM
+	------------------------------------------------------------------------- */
+
+	.c-search-form {
+		.form-fields { border-color: $soft-gray; }
+		input { color: $dark-gray; }
+	}
+
+	/* -------------------------------------------------------------------------
+		SERVICE
+	------------------------------------------------------------------------- */
+
+	.c-service {
+		.service-image a { @include image-overlay; }
+		.service-title a { border-color: $soft-gray; }
+		.service-title a:hover { border-color: $color-1; }
+	}
+
+	/* -------------------------------------------------------------------------
+		SERVICE LIST
+	------------------------------------------------------------------------- */
+
+	.c-service-list {
+		.owl-controls { @include dots-pagination; }
+	}
+
+	/* -------------------------------------------------------------------------
+		TABS
+	------------------------------------------------------------------------- */
+
+	.c-tabs { border-color: $soft-gray;
+		.tab-list > li { color: $dark-gray; border-color: $soft-gray; background-color: transparent; }
+		.tab-list > li:hover { border-color: $medium-gray; }
+		.tab-list > li.m-active { color: #FFF; border-color: $color-1; background-color: $color-1; @include vertical-gradient( rgba( $color-2, .2 ), transparent ); }
+	}
+
+	/* -------------------------------------------------------------------------
+		TEAM MEMBER
+	------------------------------------------------------------------------- */
+
+	.various-content .c-team-member,
+	.c-team-member {
+		.member-portrait { background-color: $color-1; @include vertical-gradient( rgba( $color-2, .7 ), transparent ); }
+		.member-name { color: $dark-gray; }
+		.member-role { color: $body-font; }
+	}
+
+	/* -------------------------------------------------------------------------
+		TESTIMONIAL
+	------------------------------------------------------------------------- */
+
+	.c-testimonial {
+		.testimonial-portrait { background-color: $color-1; @include vertical-gradient( rgba( $color-2, .7 ), transparent ); }
+	}
+
+	/* -------------------------------------------------------------------------
+		TESTIMONIAL LIST
+	------------------------------------------------------------------------- */
+
+	.c-testimonial-list { background-color: $x-soft-gray;
+		.owl-controls { @include dots-pagination; }
+	}
+
+
+/* -----------------------------------------------------------------------------
+
+    3.) HEADER
+
+----------------------------------------------------------------------------- */
+
+#header { color: $header-font; background: $color-2 url( $header-bg-image ) 0 0 no-repeat; background-size: cover; }
+.header-bg { background-color: $color-2; background-color: rgba( $color-2, .9 ); @include vertical-gradient( rgba( $color-1, 0.6 ), $color-2 ); }
+.cssgradients .header-bg { background-color: rgba( $color-2, .5 ); }
+.header-inner { background-image: url( $header-animated-image ); background-repeat: repeat-x; background-position: 0 0; }
+
+	/* -------------------------------------------------------------------------
+		HEADER BRANDING
+	------------------------------------------------------------------------- */
+
+	#header .header-branding > a { @include text-shadow-light; color: #1f1f1f; }
+
+	/* -------------------------------------------------------------------------
+		HEADER NAV
+	------------------------------------------------------------------------- */
+
+	// HEADER MENU
+	.header-menu a { color: $header-font; }
+	.header-menu > ul > li.m-active > span > a { color: $color-3; }
+	.header-menu > ul > li > span > a:before { background-color: $header-font; background-color: rgba( $header-font, .2 ); }
+	.header-menu .sub-menu { background-color: $header-submenu-bg; @include box-shadow( 0 2px 2px rgba(0,0,0,.15) );
+		a { color: $header-submenu-font; }
+		a:hover { border-color: $header-submenu-font; }
+		&:before { border-right-color: $header-submenu-bg; }
+		> li.m-active a { color: $color-1; }
+		> li.m-active a:hover { border-color: $color-1; }
+	}
+
+	// HEADER CART
+	.header-cart {
+		a { color: $header-font;  }
+		a:before { background-color: #FFF; background-color: rgba( #FFF, 0.2 ); }
+	}
+
+	// HEADER SEARCH
+	.header-search {
+		.search-form:before { background-color: #FFF; background-color: rgba( #FFF, 0.2 ); }
+		.search-input { @include input-placeholder( rgba( $header-font, .8 ) ); color: $header-font; }
+		.search-submit { color: $x-dark-gray; background-color: $color-3; }
+		.search-toggle { color: $header-font; }
+	}
+
+	/* -------------------------------------------------------------------------
+		HEADER PANEL
+	------------------------------------------------------------------------- */
+
+	.header-panel { background-color: rgba( #FFF, .08 ); }
+
+	// HEADER RESERVATION
+	.header-reservation .c-button { color: $x-dark-gray; background-color: $color-3; background-image: none; }
+	.header-reservation .c-button:hover { @include box-shadow( 0 0 20px rgba( #FFF, .3 ) ); }
+
+	// HEADER CONTACT
+	.header-contact .ico { -webkit-text-stroke: 0.01em rgba( $header-font, .7 ); }
+	.header-contact a { color: $header-font; border-color: rgba( $header-font, 0.2 ); -webkit-text-stroke: 0.01em rgba( $header-font, .7 ); }
+	.header-contact a:hover { border-color: rgba( $header-font, 1 ); }
+
+	// HEADER SOCIAL
+	.header-social > ul:before,
+	.header-social > ul:after { background-color: $header-font; background-color: rgba( $header-font, .2 ); }
+	.header-social > ul > li > a { color: $header-font; border-color: $header-font; border-color: rgba( $header-font, .3 ); -webkit-text-stroke: 0.01em rgba( $header-font, .7 ); }
+	.header-social > ul > li > a:hover { border-color: rgba( $header-font, .6 ); }
+
+
+/* -----------------------------------------------------------------------------
+
+    4.) MAIN SLIDER
+
+----------------------------------------------------------------------------- */
+
+#main-slider {
+
+	.slide h1,
+	.slide h2 { color: $color-1; -webkit-text-stroke: 0.01em rgba( $color-1, .5 ); }
+	.slide h3 { color: $dark-gray; }
+
+	/* -------------------------------------------------------------------------
+        SLIDER NAV
+	------------------------------------------------------------------------- */
+
+	.slider-nav { background-color: $body-bg; background-color: rgba( $body-bg, .9 ); }
+	.slider-nav ul > li > button:hover,
+	.slider-nav ul > li.m-active > button { color: $color-1; }
+
+	/* -------------------------------------------------------------------------
+        SLIDER PAUSE BUTTON
+	------------------------------------------------------------------------- */
+
+	.slider-pause-btn { color: #FFF; background-color: $color-1; @include vertical-gradient( rgba( $color-2, .2 ), transparent ); }
+	.slider-pause-btn.m-active,
+	.slider-pause-btn:hover { @include box-shadow( inset 0 0 20px 0 rgba( $color-2, 0.35 ) ); }
+
+	/* -------------------------------------------------------------------------
+        SLIDER INDICATOR
+	------------------------------------------------------------------------- */
+
+	.slider-indicator { background-color: $body-bg; background-color: rgba( $body-bg, .8 ); }
+	.slider-indicator > span { background-color: $color-1; @include horizontal-gradient( rgba( $color-2, .5 ), transparent ); }
+
+	}
+
+
+/* -----------------------------------------------------------------------------
+
+    5.) CORE
+
+----------------------------------------------------------------------------- */
+
+#core.core-bg-1 { background: url( $core-bg-1 ) right 0 no-repeat; }
+#core.core-bg-2 { background: url( $core-bg-2 ) right 0 no-repeat; }
+
+	/* -------------------------------------------------------------------------
+        PAGE HEADER
+	------------------------------------------------------------------------- */
+
+	#page-header h1 { color: $dark-gray; border-color: $soft-gray; }
+
+	/* -------------------------------------------------------------------------
+        BLOG LIST / DETAIL
+	------------------------------------------------------------------------- */
+
+	.blog-detail,
+	.blog-list {
+
+		// ARTICLE
+		.article-title { color: $dark-gray; }
+		.article-footer { border-color: $soft-gray; }
+		.article-info > li:before { color: $medium-gray; }
+		.article-quote { border-color: $soft-gray; }
+		.article-quote blockquote p { color: $dark-gray; }
+		.article-link { border-color: $soft-gray; }
+
+	}
+
+	/* -------------------------------------------------------------------------
+        BLOG DETAIL
+	------------------------------------------------------------------------- */
+
+	.blog-detail {
+
+		// ARTICLE AUTHOR
+		.article-author .author-inner { border-color: $soft-gray; }
+		.article-author .author-portrait { background-color: $color-1; @include vertical-gradient( rgba( $color-2, .7 ), transparent ); }
+		.article-author .author-name { color: $dark-gray; }
+
+		// ARTICLE NAVIGATION
+		.article-navigation h5 { color: $dark-gray; }
+
+		// ARTICLE COMMENTS
+		.comment-list {
+			.comment-author { color: $dark-gray; }
+			.comment-info { border-color: $soft-gray; }
+			.comment-date:before,
+			.comment-reply:before { color: $medium-gray; }
+			.comment-reply:hover:before { color: $color-1; }
+		}
+
+	}
+
+	/* -------------------------------------------------------------------------
+		PRODUCT LIST
+	------------------------------------------------------------------------- */
+
+	// PRODUT LIST TOOLS
+	.product-list-tools .product-list-title { color: $dark-gray; }
+
+	// PRODUCT LIST
+	.product-list {
+		.product-inner { border-color: $soft-gray; background-color: $body-bg; }
+		.product-title a { color: $dark-gray; }
+		.product-title a:hover { border-color: $dark-gray; }
+		.product-price { color: $dark-gray; }
+	}
+
+	/* -------------------------------------------------------------------------
+        PRODUCT DETAIL
+	------------------------------------------------------------------------- */
+
+	.product-detail {
+
+		// PRODUCT SHORT DESCRIPTION
+		.product-short-description { border-color: $soft-gray; }
+
+		// PRODUCT INFO
+		.product-info { border-color: $soft-gray; }
+		.product-status.m-available { color: #499161; }
+		.product-status.m-unavailable { color: #d40041; }
+		.product-status.m-info { color: #c88435; }
+		.product-status.m-available .product-status-inner .ico { color: #499161; background-color: #d4fbd3; }
+		.product-status.m-unavailable .product-status-inner .ico { color: #d40041; background-color: #ffdfe0; }
+		.product-status.m-info .product-status-inner .ico { color: #c88435; background-color: #fff4cf; }
+		.product-price .price { color: $color-1; }
+
+		// PRODUCT REVIEWS
+		.review-list {
+			.review-author { color: $dark-gray; }
+			.review-rating { color: $color-1; }
+			.review-info { border-color: $soft-gray; }
+			.review-date:before { color: $medium-gray; }
+		}
+
+		// REVIEW FORM
+		.review-form-title { color: $dark-gray; }
+		.review-form .rating-stars { color: $color-1; }
+
+	}
+
+	/* -------------------------------------------------------------------------
+        SHOP CART
+	------------------------------------------------------------------------- */
+
+	.shop-cart {
+
+		// CART TABLE
+		.cart-table {
+			th { color: $dark-gray; border-color: $soft-gray; }
+			td { border-color: $soft-gray; }
+		}
+
+	}
+
+	/* -------------------------------------------------------------------------
+        SHOP CHECKOUT
+	------------------------------------------------------------------------- */
+
+	.shop-checkout {
+
+		// ORDER SUMMARY
+		.order-summary table {
+			th { color: $dark-gray; border-color: $soft-gray; }
+			td { border-color: $soft-gray; }
+		}
+
+		// CHECKOUT FOOTER
+		.checkout-footer { border-color: $soft-gray; }
+
+	}
+
+	/* -------------------------------------------------------------------------
+        SEARCH RESULTS
+	------------------------------------------------------------------------- */
+
+	.search-results .item-title { color: $dark-gray; }
+	.search-results .search-query { color: $color-2; }
+
+	/* -------------------------------------------------------------------------
+        ERROR 404
+	------------------------------------------------------------------------- */
+
+	.error-404 {
+		.error-header h1 { color: $color-1; }
+		.error-header h1 > span { color: $medium-gray; }
+		.error-header p { color: $dark-gray; }
+	}
+
+
+/* -----------------------------------------------------------------------------
+
+    6.) SIDEBAR
+
+----------------------------------------------------------------------------- */
+
+	#sidebar {
+		.widget-title { color: $dark-gray; }
+		.widget-title:before { background-color: $color-1; }
+	}
+
+	// SIDEBAR ARTICLES
+	.sidebar-articles ul > li { border-color: $soft-gray; }
+
+	// SIDEBAR CART
+	.sidebar-cart {
+		.cart-product-list > li { border-color: $soft-gray; }
+		.cart-footer { border-color: $soft-gray; }
+	}
+
+	// SIDEBAR LINKS
+	.sidebar-links .widget-content { border-color: $soft-gray; }
+	.sidebar-links ul > li:before { border-color: $soft-gray; }
+
+	// SIDEBAR PRODUCTS
+	.sidebar-products ul > li { border-color: $soft-gray; }
+
+	// SIDEBAR TAGS
+	.sidebar-tags ul > li > a { color: $body-font; border-color: $soft-gray; }
+	.sidebar-tags ul > li > a:hover { border-color: $medium-gray; }
+
+
+/* -----------------------------------------------------------------------------
+
+    7.) BOTTOM PANEL
+
+----------------------------------------------------------------------------- */
+
+#bottom-panel { color: $bottom-panel-font; background:$bottom-panel-bg url( $bottom-panel-bg-image ) center center no-repeat; background-size: cover;
+
+	.bottom-panel-inner { background-color: $bottom-panel-bg; background-color: rgba( $bottom-panel-bg, .85 ); }
+	h3 { color: $bottom-panel-title; }
+
+	// SUBSCRIBE FORM
+	#subscribe-form .form-fields { background-color: #FFF; background-color: rgba( #FFF, .8 ); }
+	#subscribe-form .c-alert-message { color: #FFF; border-color: rgba( #FFF, .2 ); background-color: transparent; }
+	#subscribe-form input { color: $dark-gray; text-shadow: 0 1px 0 rgba( #FFF, 0.15 ); background: none; }
+
+}
+
+
+/* -----------------------------------------------------------------------------
+
+    8.) FOOTER
+
+----------------------------------------------------------------------------- */
+
+#footer { @include vertical-gradient( rgba( #000, 0.05 ) 0%, rgba( 0, 0, 0, 0 ) 100% );
+	@include box-shadow( inset 0 1px 0 #FFF ); border-color: $soft-gray; }
+
+	/* -------------------------------------------------------------------------
+        FOOTER TWITTER
+    ------------------------------------------------------------------------- */
+
+	.footer-twitter { border-color: $soft-gray; }
+	.footer-twitter .ico { color: #55acee; }
+	.footer-twitter .twitter-title a { color: $dark-gray; }
+	.footer-twitter .twitter-title a:hover { border-color: $dark-gray; }
+	.footer-twitter .btn-prev,
+	.footer-twitter .btn-next { color: #c5c5c5; }
+
+
+/* -----------------------------------------------------------------------------
+
+    9.) OTHER
+
+----------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+        JQUERY UI DATEPICKER
+    ------------------------------------------------------------------------- */
+
+	#ui-datepicker-div { color: #FFF; background-color: $dark-gray; background-color: rgba( $dark-gray, .98 ); @include vertical-gradient( rgba( #FFF, .1 ), transparent ); }
+
+	// HEADER
+	.ui-datepicker-prev:before,
+	.ui-datepicker-next:before { color: $color-1; }
+	.ui-datepicker-title { border-color: rgba( #FFF, .05 ); }
+
+	// TABLE
+	.various-content .ui-datepicker-calendar,
+	.ui-datepicker-calendar {
+		thead th { color: #FFF; }
+		tbody td a { color: #FFF; background-color: rgba( #FFF, .04 ); }
+		tbody td a:hover { background-color: $color-1; }
+		tbody td.ui-datepicker-today a { color: $x-dark-gray; background-color: $color-3; }
+		tbody td.ui-datepicker-today.ui-state-disabled { color: $color-3; }
+		tbody td a.ui-state-active { background-color: rgba( #FFF, .12 ); }
+		tbody tr:nth-child(odd) td { background-color: transparent; }
+	}
+
+	/* -------------------------------------------------------------------------
+        MAGNIFIC POPUP BG
+    ------------------------------------------------------------------------- */
+
+	.mfp-bg { background-color: #000; }
+
+
+/* -----------------------------------------------------------------------------
+
+    10.) RESPONSIVE
+
+----------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+        EXTRA LARGE DEVICES
+    ------------------------------------------------------------------------- */
+
+	@media ( max-width: 1400px ), ( max-height: 700px ) {
+
+		// HEADER
+		.header-panel-toggle { color: #FFF; background-color: $color-1; }
+		.header-panel-toggle:hover { @include box-shadow( inset 0 0 10px 0 rgba( $color-2, 0.35 ) ); }
+		.header-panel-toggle:active { @include box-shadow( inset 0 0 10px 0 rgba( $color-2, 0.65 ) ); }
+
+	}
+
+    /* -------------------------------------------------------------------------
+        LARGE DEVICES
+    ------------------------------------------------------------------------- */
+
+    @media ( max-width: 1199px ) {
+
+		// HEADER
+		#header { background-position: center; }
+		.header-inner { background-position: 0 -100px; }
+		#header.m-animated .header-inner.animate-to-left { background-position: -1000px -100px; }
+		.header-navigation { border-color: rgba( #FFF, .2 ); }
+		.header-menu .submenu-toggle { color: #FFF; border-color: rgba( #FFF, .3 ); }
+		.header-menu .sub-menu:before { border-right-color: transparent; border-bottom-color: $header-submenu-bg; }
+		.header-cart {
+			a { border-color: #FFF; border-color: rgba( #FFF, .3 ); }
+			a:hover { border-color: rgba( #FFF, .6 ); }
+		}
+		.header-search {
+			.header-search-inner { border-color: #FFF; border-color: rgba( #FFF, .05 ); }
+			.search-form { border-color: #FFF; border-color: rgba( #FFF, .2 ); }
+			.search-toggle-mobile { border-color: #FFF; border-color: rgba( #FFF, .3 ); }
+			.search-toggle-mobile.m-active,
+			.search-toggle-mobile:hover { border-color: rgba( #FFF, .6 ); }
+			.search-toggle-mobile > i:before { color: #FFF; }
+		}
+		.header-panel { background-color: transparent; }
+		.header-reservation { border-color: #FFF; border-color: rgba( #FFF, .05 ); }
+		.header-contact > ul { border-color: #FFF; border-color: rgba( #FFF, .05 ); }
+
+	}
+
+    /* -------------------------------------------------------------------------
+        MEDIUM DEVICES
+    ------------------------------------------------------------------------- */
+
+    @media ( max-width: 991px ) {
+
+		// HEADER
+		#header.m-animated .header-inner.animate-to-left { background-position: 0 -100px; }
+		.header-menu > ul { border-color: rgba( #FFF, .05 ); }
+		.header-menu .sub-menu { background: none; @include box-shadow( none );
+			a { color: $header-font; border-color: rgba( $header-font, .2 ); }
+			a:hover { border-color: $header-font; }
+			> li.m-active a { color: $color-3; }
+			> li.m-active a:hover { border-color: $color-3; }
+		}
+		.header-menu-toggle { color: #FFF; border-color: rgba( #FFF, .3 ); }
+		.header-menu-toggle.m-active,
+		.header-menu-toggle:hover { border-color: rgba( #FFF, .6 ); }
+
+		// MAIN SLIDER
+		#main-slider .slide-bg { background-color: rgba( #FFF, .7 ); }
+		#main-slider .slider-nav { background-color: transparent; }
+		#main-slider .slider-nav { border-color: $soft-gray; }
+
+	}
+
+	/* -------------------------------------------------------------------------
+        EXTRA SMALL DEVICES
+    ------------------------------------------------------------------------- */
+
+	@media ( max-width: 480px ) {
+
+		// BOTTOM PANEL
+		#bottom-panel #subscribe-form .form-fields { background-color: transparent; }
+		#bottom-panel #subscribe-form input { background-color: #FFF; background-color: rgba( #FFF, .8 ); }
+
+	}
